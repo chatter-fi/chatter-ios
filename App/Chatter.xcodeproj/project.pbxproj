@@ -12,7 +12,7 @@
 		BA78BDDF2A2C473800FF8EF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA78BDDE2A2C473800FF8EF0 /* Assets.xcassets */; };
 		BA78BDE22A2C473800FF8EF0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA78BDE12A2C473800FF8EF0 /* Preview Assets.xcassets */; };
 		BAB0E9602A2C4A0A00D896AB /* BuildTools in Resources */ = {isa = PBXBuildFile; fileRef = BAB0E95F2A2C4A0A00D896AB /* BuildTools */; };
-		BAF977432A2C4A9C0021159A /* chatter-venom-ios in Resources */ = {isa = PBXBuildFile; fileRef = BAF977422A2C4A9C0021159A /* chatter-venom-ios */; };
+		BAF977432A2C4A9C0021159A /* Chatter in Resources */ = {isa = PBXBuildFile; fileRef = BAF977422A2C4A9C0021159A /* Chatter */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,7 +22,7 @@
 		BA78BDDE2A2C473800FF8EF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA78BDE12A2C473800FF8EF0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BAB0E95F2A2C4A0A00D896AB /* BuildTools */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = BuildTools; sourceTree = "<group>"; };
-		BAF977422A2C4A9C0021159A /* chatter-venom-ios */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "Chatter"; path = ..; sourceTree = "<group>"; };
+		BAF977422A2C4A9C0021159A /* Chatter */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Chatter; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,7 +39,7 @@
 		BA78BDCE2A2C473800FF8EF0 = {
 			isa = PBXGroup;
 			children = (
-				BAF977422A2C4A9C0021159A /* chatter-venom-ios */,
+				BAF977422A2C4A9C0021159A /* Chatter */,
 				BAB0E95F2A2C4A0A00D896AB /* BuildTools */,
 				BA78BDD92A2C473800FF8EF0 /* iOS */,
 				BA78BDD82A2C473800FF8EF0 /* Products */,
@@ -83,6 +83,7 @@
 				BA78BDD32A2C473800FF8EF0 /* Sources */,
 				BA78BDD42A2C473800FF8EF0 /* Frameworks */,
 				BA78BDD52A2C473800FF8EF0 /* Resources */,
+				BA7B3C402A2C4C750085BDA8 /* Swift Format */,
 			);
 			buildRules = (
 			);
@@ -133,12 +134,33 @@
 			files = (
 				BAB0E9602A2C4A0A00D896AB /* BuildTools in Resources */,
 				BA78BDE22A2C473800FF8EF0 /* Preview Assets.xcassets in Resources */,
-				BAF977432A2C4A9C0021159A /* chatter-venom-ios in Resources */,
+				BAF977432A2C4A9C0021159A /* Chatter in Resources */,
 				BA78BDDF2A2C473800FF8EF0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BA7B3C402A2C4C750085BDA8 /* Swift Format */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Swift Format";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd BuildTools\nSDKROOT=(xcrun --sdk macosx --show-sdk-path)\n#swift package update #Uncomment this line temporarily to update the version used to the latest matching your BuildTools/Package.swift file\nif [ \"${ENABLE_PREVIEWS}\" = \"YES\" ]; then\n  echo \"Previews enabled, quitting to prevent 'preview paused'.\"\n  exit 0;\nfi\n\nswift run -c release swiftformat \"$SRCROOT/../\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BA78BDD32A2C473800FF8EF0 /* Sources */ = {
