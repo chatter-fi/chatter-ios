@@ -1,0 +1,11 @@
+/*
+ Copyright (c) 2023 Rocketdan
+
+ Chatter Venom iOS Project
+ File Name : en.lproj/Localizable.strings
+ Description : Chatter Venom Localization Strings File (Only support english)
+*/
+
+intro.slogan = "Don’t get\nstress for trading.\nTake\na voice assistant.";
+intro.generate_new_wallet = "Get a New Wallet";
+intro.already_own = "I already have one";
