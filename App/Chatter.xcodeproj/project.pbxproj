@@ -8,17 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		BA78BDDB2A2C473800FF8EF0 /* ChatterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA78BDDA2A2C473800FF8EF0 /* ChatterApp.swift */; };
-		BA78BDDD2A2C473800FF8EF0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA78BDDC2A2C473800FF8EF0 /* ContentView.swift */; };
+		BA78BDDD2A2C473800FF8EF0 /* IntroScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA78BDDC2A2C473800FF8EF0 /* IntroScreen.swift */; };
 		BA78BDDF2A2C473800FF8EF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA78BDDE2A2C473800FF8EF0 /* Assets.xcassets */; };
 		BA78BDE22A2C473800FF8EF0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA78BDE12A2C473800FF8EF0 /* Preview Assets.xcassets */; };
-		BAB0E9602A2C4A0A00D896AB /* BuildTools in Resources */ = {isa = PBXBuildFile; fileRef = BAB0E95F2A2C4A0A00D896AB /* BuildTools */; };
-		BAF977432A2C4A9C0021159A /* Chatter in Resources */ = {isa = PBXBuildFile; fileRef = BAF977422A2C4A9C0021159A /* Chatter */; };
+		BAA2FEA72A2C823C0009F98C /* AppCore in Frameworks */ = {isa = PBXBuildFile; productRef = BAA2FEA62A2C823C0009F98C /* AppCore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BA78BDD72A2C473800FF8EF0 /* Chatter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chatter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA78BDDA2A2C473800FF8EF0 /* ChatterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatterApp.swift; sourceTree = "<group>"; };
-		BA78BDDC2A2C473800FF8EF0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		BA78BDDC2A2C473800FF8EF0 /* IntroScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroScreen.swift; sourceTree = "<group>"; };
 		BA78BDDE2A2C473800FF8EF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA78BDE12A2C473800FF8EF0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BAB0E95F2A2C4A0A00D896AB /* BuildTools */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = BuildTools; sourceTree = "<group>"; };
@@ -30,6 +29,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAA2FEA72A2C823C0009F98C /* AppCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +43,7 @@
 				BAB0E95F2A2C4A0A00D896AB /* BuildTools */,
 				BA78BDD92A2C473800FF8EF0 /* iOS */,
 				BA78BDD82A2C473800FF8EF0 /* Products */,
+				BAA2FEA32A2C7E660009F98C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,7 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				BA78BDDA2A2C473800FF8EF0 /* ChatterApp.swift */,
-				BA78BDDC2A2C473800FF8EF0 /* ContentView.swift */,
+				BA78BDDC2A2C473800FF8EF0 /* IntroScreen.swift */,
 				BA78BDDE2A2C473800FF8EF0 /* Assets.xcassets */,
 				BA78BDE02A2C473800FF8EF0 /* Preview Content */,
 			);
@@ -71,6 +72,13 @@
 				BA78BDE12A2C473800FF8EF0 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		BAA2FEA32A2C7E660009F98C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -90,6 +98,9 @@
 			dependencies = (
 			);
 			name = Chatter;
+			packageProductDependencies = (
+				BAA2FEA62A2C823C0009F98C /* AppCore */,
+			);
 			productName = Chatter;
 			productReference = BA78BDD72A2C473800FF8EF0 /* Chatter.app */;
 			productType = "com.apple.product-type.application";
@@ -132,9 +143,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAB0E9602A2C4A0A00D896AB /* BuildTools in Resources */,
 				BA78BDE22A2C473800FF8EF0 /* Preview Assets.xcassets in Resources */,
-				BAF977432A2C4A9C0021159A /* Chatter in Resources */,
 				BA78BDDF2A2C473800FF8EF0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -167,7 +176,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA78BDDD2A2C473800FF8EF0 /* ContentView.swift in Sources */,
+				BA78BDDD2A2C473800FF8EF0 /* IntroScreen.swift in Sources */,
 				BA78BDDB2A2C473800FF8EF0 /* ChatterApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -304,8 +313,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -339,8 +348,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -381,6 +390,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BAA2FEA62A2C823C0009F98C /* AppCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AppCore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BA78BDCF2A2C473800FF8EF0 /* Project object */;
 }

@@ -5,11 +5,32 @@ import PackageDescription
 
 let package = Package(
     name: "Chatter",
-    defaultLocalization: "ko",
+    defaultLocalization: "en",
     platforms: [
-        .iOS(.v15),
+        .iOS(.v16),
     ],
-    products: [],
+    products: [
+        .library(name: "AppCore", targets: ["AppCore"]),
+        .library(name: "AppResources", targets: ["AppResources"]),
+        .library(name: "DesignSystem", targets: ["DesignSystem"]),
+    ],
     dependencies: [],
-    targets: []
+    targets: [
+        .target(
+            name: "AppCore",
+            dependencies: [
+                "DesignSystem",
+            ]
+        ),
+        .target(
+            name: "AppResources",
+            resources: [.process("Assets")]
+        ),
+        .target(
+            name: "DesignSystem",
+            dependencies: [
+                "AppResources",
+            ]
+        ),
+    ]
 )
