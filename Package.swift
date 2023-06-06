@@ -13,6 +13,7 @@ let package = Package(
         .library(name: "AppCore", targets: ["AppCore"]),
         .library(name: "AppResources", targets: ["AppResources"]),
         .library(name: "DesignSystem", targets: ["DesignSystem"]),
+        .library(name: "Utils", targets: ["Utils"]),
     ],
     dependencies: [],
     targets: [
@@ -20,6 +21,7 @@ let package = Package(
             name: "AppCore",
             dependencies: [
                 "DesignSystem",
+                "Utils",
             ]
         ),
         .target(
@@ -31,6 +33,10 @@ let package = Package(
             dependencies: [
                 "AppResources",
             ]
+        ),
+        .target(
+            name: "Utils",
+            dependencies: []
         ),
     ]
 )

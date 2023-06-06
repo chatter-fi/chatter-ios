@@ -5,8 +5,10 @@
 // Description : Name Input Screen
 
 import AppResources
+import EverscaleClientSwift
 import Foundation
 import SwiftUI
+import Utils
 
 struct WalletCreateLoadingScreen: View {
     @State private var firstShapeAngle: Angle = .degrees(-45)
@@ -81,6 +83,37 @@ struct WalletCreateLoadingScreen: View {
                 withAnimation(.easeInOut(duration: 0.5)) {
                     fourthShapeHeight = .random(in: 25 ... 54)
                 }
+            }
+
+            Task {
+                var config: TSDKClientConfig = .init()
+                config.network = TSDKNetworkConfig(endpoints: ["https://gql-devnet.venom.network/graphql"])
+
+                let client: TSDKClientModule = try TSDKClientModule(config: config)
+                let seedWords = try await client.crypto.mnemonic_from_random(.init(dictionary: .English, word_count: 12))
+
+                print("========== [SeedWords] ==========================================================")
+                print("\(seedWords.phrase)")
+                print("=================================================================================\n")
+
+                let generatedKeyPair = try await client.crypto.mnemonic_derive_sign_keys(.init(phrase: seedWords.phrase))
+
+                print("========== [SeedBasedKeyPair] ===================================================")
+                print("Private Key : \(generatedKeyPair.secret)")
+                print("Public Key : \(generatedKeyPair.public)")
+                print("=================================================================================\n")
+                
+                // 0:dd307cf4d78cdb388c20f2cbd94b9dc65554f1970084427aabab2fe2fa2cfa31
+                // P:0dad3060919bc6e53e348aae5d77b364cdcb09086d2d40ae408616e5685a2e63
+                
+                try client.abi.
+            
+                print("========== [DisplayableAddress] =================================================")
+                print("Wallet Address Name : \(displayableAddress.address)")
+                print("=================================================================================\n")
+
+                // let randomPasswords = generateRandomPasswords(length: 20)
+                // print("=============== [RANDOM PASSWORDS] \(randomPasswords)")
             }
         }
     }

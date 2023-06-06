@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		BA46ADE32A2F12BF005929F8 /* WalletCreateLoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA46ADE22A2F12BF005929F8 /* WalletCreateLoadingScreen.swift */; };
+		BA46ADF52A2F25C5005929F8 /* EverscaleClientSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BA46ADF42A2F25C5005929F8 /* EverscaleClientSwift */; };
+		BA46ADF72A2F2A6D005929F8 /* libton_client.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA46ADED2A2F1D48005929F8 /* libton_client.xcframework */; };
 		BA67627A2A2DF27000C222E0 /* NameInputScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6762792A2DF27000C222E0 /* NameInputScreen.swift */; };
 		BA78BDDB2A2C473800FF8EF0 /* ChatterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA78BDDA2A2C473800FF8EF0 /* ChatterApp.swift */; };
 		BA78BDDD2A2C473800FF8EF0 /* IntroScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA78BDDC2A2C473800FF8EF0 /* IntroScreen.swift */; };
@@ -18,6 +20,9 @@
 
 /* Begin PBXFileReference section */
 		BA46ADE22A2F12BF005929F8 /* WalletCreateLoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCreateLoadingScreen.swift; sourceTree = "<group>"; };
+		BA46ADE82A2F193A005929F8 /* tonclient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tonclient.h; sourceTree = "<group>"; };
+		BA46ADEA2A2F194E005929F8 /* Chatter-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Chatter-Bridging-Header.h"; sourceTree = "<group>"; };
+		BA46ADED2A2F1D48005929F8 /* libton_client.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libton_client.xcframework; sourceTree = "<group>"; };
 		BA6762792A2DF27000C222E0 /* NameInputScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameInputScreen.swift; sourceTree = "<group>"; };
 		BA78BDD72A2C473800FF8EF0 /* Chatter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chatter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA78BDDA2A2C473800FF8EF0 /* ChatterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatterApp.swift; sourceTree = "<group>"; };
@@ -33,16 +38,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA46ADF52A2F25C5005929F8 /* EverscaleClientSwift in Frameworks */,
 				BAA2FEA72A2C823C0009F98C /* AppCore in Frameworks */,
+				BA46ADF72A2F2A6D005929F8 /* libton_client.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA46ADE62A2F193A005929F8 /* TonSDK */ = {
+			isa = PBXGroup;
+			children = (
+				BA46ADED2A2F1D48005929F8 /* libton_client.xcframework */,
+			);
+			name = TonSDK;
+			path = ../TonSDK;
+			sourceTree = "<group>";
+		};
 		BA78BDCE2A2C473800FF8EF0 = {
 			isa = PBXGroup;
 			children = (
+				BA46ADE62A2F193A005929F8 /* TonSDK */,
 				BAF977422A2C4A9C0021159A /* Chatter */,
 				BAB0E95F2A2C4A0A00D896AB /* BuildTools */,
 				BA78BDD92A2C473800FF8EF0 /* iOS */,
@@ -62,12 +79,14 @@
 		BA78BDD92A2C473800FF8EF0 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				BA46ADE82A2F193A005929F8 /* tonclient.h */,
 				BA78BDDA2A2C473800FF8EF0 /* ChatterApp.swift */,
 				BA78BDDC2A2C473800FF8EF0 /* IntroScreen.swift */,
 				BA6762792A2DF27000C222E0 /* NameInputScreen.swift */,
 				BA46ADE22A2F12BF005929F8 /* WalletCreateLoadingScreen.swift */,
 				BA78BDDE2A2C473800FF8EF0 /* Assets.xcassets */,
 				BA78BDE02A2C473800FF8EF0 /* Preview Content */,
+				BA46ADEA2A2F194E005929F8 /* Chatter-Bridging-Header.h */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -106,6 +125,7 @@
 			name = Chatter;
 			packageProductDependencies = (
 				BAA2FEA62A2C823C0009F98C /* AppCore */,
+				BA46ADF42A2F25C5005929F8 /* EverscaleClientSwift */,
 			);
 			productName = Chatter;
 			productReference = BA78BDD72A2C473800FF8EF0 /* Chatter.app */;
@@ -123,6 +143,7 @@
 				TargetAttributes = {
 					BA78BDD62A2C473800FF8EF0 = {
 						CreatedOnToolsVersion = 14.3.1;
+						LastSwiftMigration = 1430;
 					};
 				};
 			};
@@ -135,6 +156,9 @@
 				Base,
 			);
 			mainGroup = BA78BDCE2A2C473800FF8EF0;
+			packageReferences = (
+				BA46ADF32A2F25C5005929F8 /* XCRemoteSwiftPackageReference "ton-client-swift" */,
+			);
 			productRefGroup = BA78BDD82A2C473800FF8EF0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -311,6 +335,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "iOS/Preview\\ Content/Preview\\ Assets.xcassets";
@@ -329,6 +354,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = "${PROJECT_DIR}/../TonSDK";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = rocketdan.venom.Chatter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -336,6 +362,8 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "iOS/Chatter-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -346,6 +374,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "iOS/Preview\\ Content/Preview\\ Assets.xcassets";
@@ -364,6 +393,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = "${PROJECT_DIR}/../TonSDK";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = rocketdan.venom.Chatter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -371,6 +401,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "iOS/Chatter-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -399,7 +430,23 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		BA46ADF32A2F25C5005929F8 /* XCRemoteSwiftPackageReference "ton-client-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nerzh/ton-client-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		BA46ADF42A2F25C5005929F8 /* EverscaleClientSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BA46ADF32A2F25C5005929F8 /* XCRemoteSwiftPackageReference "ton-client-swift" */;
+			productName = EverscaleClientSwift;
+		};
 		BAA2FEA62A2C823C0009F98C /* AppCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AppCore;
