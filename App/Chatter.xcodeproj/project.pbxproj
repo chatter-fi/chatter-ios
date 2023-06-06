@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA46ADE32A2F12BF005929F8 /* WalletCreateLoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA46ADE22A2F12BF005929F8 /* WalletCreateLoadingScreen.swift */; };
+		BA67627A2A2DF27000C222E0 /* NameInputScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6762792A2DF27000C222E0 /* NameInputScreen.swift */; };
 		BA78BDDB2A2C473800FF8EF0 /* ChatterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA78BDDA2A2C473800FF8EF0 /* ChatterApp.swift */; };
 		BA78BDDD2A2C473800FF8EF0 /* IntroScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA78BDDC2A2C473800FF8EF0 /* IntroScreen.swift */; };
 		BA78BDDF2A2C473800FF8EF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA78BDDE2A2C473800FF8EF0 /* Assets.xcassets */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BA46ADE22A2F12BF005929F8 /* WalletCreateLoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCreateLoadingScreen.swift; sourceTree = "<group>"; };
+		BA6762792A2DF27000C222E0 /* NameInputScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameInputScreen.swift; sourceTree = "<group>"; };
 		BA78BDD72A2C473800FF8EF0 /* Chatter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chatter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA78BDDA2A2C473800FF8EF0 /* ChatterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatterApp.swift; sourceTree = "<group>"; };
 		BA78BDDC2A2C473800FF8EF0 /* IntroScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroScreen.swift; sourceTree = "<group>"; };
@@ -60,6 +64,8 @@
 			children = (
 				BA78BDDA2A2C473800FF8EF0 /* ChatterApp.swift */,
 				BA78BDDC2A2C473800FF8EF0 /* IntroScreen.swift */,
+				BA6762792A2DF27000C222E0 /* NameInputScreen.swift */,
+				BA46ADE22A2F12BF005929F8 /* WalletCreateLoadingScreen.swift */,
 				BA78BDDE2A2C473800FF8EF0 /* Assets.xcassets */,
 				BA78BDE02A2C473800FF8EF0 /* Preview Content */,
 			);
@@ -177,6 +183,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA78BDDD2A2C473800FF8EF0 /* IntroScreen.swift in Sources */,
+				BA46ADE32A2F12BF005929F8 /* WalletCreateLoadingScreen.swift in Sources */,
+				BA67627A2A2DF27000C222E0 /* NameInputScreen.swift in Sources */,
 				BA78BDDB2A2C473800FF8EF0 /* ChatterApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -6,6 +6,14 @@
  Description : Chatter Venom Localization Strings File (Only support english)
 */
 
+next = "Next";
+
 intro.slogan = "Don’t get\nstress for trading.\nTake\na voice assistant.";
 intro.generate_new_wallet = "Get a New Wallet";
 intro.already_own = "I already have one";
+
+name_input.title = "What’s your name?";
+name_input.placeholder = "Write your name";
+name_input.error_min_length = "At least 4 characters.";
+name_input.error_max_length = "Max. 10 characters.";
+name_input.valid = "Looks great!";
