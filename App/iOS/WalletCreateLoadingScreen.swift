@@ -7,6 +7,7 @@
 import AppResources
 import EverscaleClientSwift
 import Foundation
+import SwiftExtensionsPack
 import SwiftUI
 import Utils
 
@@ -87,7 +88,7 @@ struct WalletCreateLoadingScreen: View {
 
             Task {
                 var config: TSDKClientConfig = .init()
-                config.network = TSDKNetworkConfig(endpoints: ["https://gql-devnet.venom.network/graphql"])
+                config.network = TSDKNetworkConfig(endpoints: ["https://venom-testnet.evercloud.dev/b1073504a34d403891e4c25e41582587/graphql"])
 
                 let client: TSDKClientModule = try TSDKClientModule(config: config)
                 let seedWords = try await client.crypto.mnemonic_from_random(.init(dictionary: .English, word_count: 12))
@@ -102,18 +103,29 @@ struct WalletCreateLoadingScreen: View {
                 print("Private Key : \(generatedKeyPair.secret)")
                 print("Public Key : \(generatedKeyPair.public)")
                 print("=================================================================================\n")
-                
-                // 0:dd307cf4d78cdb388c20f2cbd94b9dc65554f1970084427aabab2fe2fa2cfa31
-                // P:0dad3060919bc6e53e348aae5d77b364cdcb09086d2d40ae408616e5685a2e63
-                
-                try client.abi.
-            
-                print("========== [DisplayableAddress] =================================================")
-                print("Wallet Address Name : \(displayableAddress.address)")
-                print("=================================================================================\n")
 
-                // let randomPasswords = generateRandomPasswords(length: 20)
-                // print("=============== [RANDOM PASSWORDS] \(randomPasswords)")
+                let walletCode = "te6cckEBBgEA/AABFP8A9KQT9LzyyAsBAgEgAgMABNIwAubycdcBAcAA8nqDCNcY7UTQgwfXAdcLP8j4KM8WI88WyfkAA3HXAQHDAJqDB9cBURO68uBk3oBA1wGAINcBgCDXAVQWdfkQ8qj4I7vyeWa++COBBwiggQPoqFIgvLHydAIgghBM7mRsuuMPAcjL/8s/ye1UBAUAmDAC10zQ+kCDBtcBcdcBeNcB10z4AHCAEASqAhSxyMsFUAXPFlAD+gLLaSLQIc8xIddJoIQJuZgzcAHLAFjPFpcwcQHLABLM4skB+wAAPoIQFp4+EbqOEfgAApMg10qXeNcB1AL7AOjRkzLyPOI+zYS/"
+                let data = try await client.boc.encode_boc(
+                    TSDKParamsOfEncodeBoc(
+                        builder: [
+                            TSDKBuilderOp(
+                                type: TSDKBuilderOpEnumTypes.Integer,
+                                size: 256,
+                                value: AnyValue.string("0x\(generatedKeyPair.public)")
+                            ),
+                            TSDKBuilderOp(
+                                type: TSDKBuilderOpEnumTypes.Integer,
+                                size: 64,
+                                value: AnyValue.uint64(0)
+                            ),
+                        ]
+                    )
+                )
+
+                let boc = try await client.boc.encode_tvc(TSDKParamsOfEncodeTvc(code: walletCode, data: data.boc))
+                print(boc.state_init)
+                let hash = try await client.boc.get_boc_hash(TSDKParamsOfGetBocHash(boc: boc.state_init))
+                print("My venom wallet address -> 0:\(hash.hash)")
             }
         }
     }
