@@ -10,7 +10,7 @@ import SwiftUI
 
 @main
 struct ChatterApp: App {
-    @State private var routes: [CTNavigationScreenRoute] = [.intro]
+    @State private var routes: [CTNavigationScreenRoute] = []
 
     var body: some Scene {
         WindowGroup {
@@ -34,7 +34,14 @@ struct ChatterApp: App {
                                 )
                                 .navigationBarBackButtonHidden()
                             case .walletCreateLoadingScreen:
-                                WalletCreateLoadingScreen()
+                                WalletCreateLoadingScreen(
+                                    onNextStep: {
+                                        routes = [.gettingStart]
+                                    }
+                                )
+                                .navigationBarBackButtonHidden()
+                            case .gettingStart:
+                                GettingStartScreen()
                                     .navigationBarBackButtonHidden()
                             }
                         }
@@ -42,6 +49,13 @@ struct ChatterApp: App {
             }
             .frame(minWidth: 0, maxWidth: .infinity)
             .frame(minHeight: 0, maxHeight: .infinity)
+            .onAppear {
+                if UserDefaults.standard.value(forKey: "rocketdan.venom.Chatter.username") == nil {
+                    routes = [.intro]
+                } else {
+                    routes = [.gettingStart]
+                }
+            }
         }
     }
 }

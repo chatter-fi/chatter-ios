@@ -9,10 +9,16 @@ import Foundation
 import LocalAuthentication
 import SwiftExtensionsPack
 
-public struct VenomWallet {
+public class VenomWallet {
     private let client: TSDKClientModule
 
     public static let shared = VenomWallet()
+
+    private var _walletAddress: String = ""
+
+    public var walletAddress: String {
+        _walletAddress
+    }
 
     private init() {
         var config: TSDKClientConfig = .init()
@@ -108,7 +114,7 @@ public struct VenomWallet {
 
     public func requestDeviceBiometricPermission() {
         let context = LAContext()
-        context.localizedReason = "Access your wallet on the device secure enclave area"
+        context.localizedReason = "Access your wallet on the keychain"
         let query: [String: Any] = [kSecClass as String: kSecClassKey,
                                     kSecAttrApplicationTag as String: "rocketdan.venom.Chatter.walletAddress".data(using: .utf8)!,
                                     kSecMatchLimit as String: kSecMatchLimitOne,
@@ -127,5 +133,32 @@ public struct VenomWallet {
                 print(walletAddress)
             }
         }
+    }
+
+    public func unlockKeyChainAndGetWalletAddress() -> String {
+        let context = LAContext()
+        context.localizedReason = "Access your wallet on the device secure enclave area"
+
+        let query: [String: Any] = [kSecClass as String: kSecClassKey,
+                                    kSecAttrApplicationTag as String: "rocketdan.venom.Chatter.walletAddress".data(using: .utf8)!,
+                                    kSecMatchLimit as String: kSecMatchLimitOne,
+                                    kSecReturnAttributes as String: true,
+                                    kSecUseAuthenticationContext as String: context,
+                                    kSecReturnData as String: true]
+
+        var item: CFTypeRef?
+        let status = SecItemCopyMatching(query as CFDictionary, &item)
+
+        if status == errSecSuccess {
+            if let existingItem = item as? [String: Any],
+               let rawWalletAddress = existingItem[kSecValueData as String] as? Data,
+               let address = String(data: rawWalletAddress, encoding: String.Encoding.utf8)
+            {
+                _walletAddress = "0:\(address)"
+                return _walletAddress
+            }
+        }
+
+        return ""
     }
 }

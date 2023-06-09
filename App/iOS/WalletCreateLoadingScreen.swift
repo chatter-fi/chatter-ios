@@ -21,6 +21,8 @@ struct WalletCreateLoadingScreen: View {
     @State private var fourthShapeAngle: Angle = .degrees(0)
     @State private var fourthShapeHeight: CGFloat = 54
 
+    let onNextStep: () -> Void
+
     var body: some View {
         VStack {
             Spacer()
@@ -96,6 +98,10 @@ struct WalletCreateLoadingScreen: View {
 
                 try await Task.sleep(for: .seconds(2))
                 VenomWallet.shared.requestDeviceBiometricPermission()
+
+                try await Task.sleep(for: .seconds(1))
+
+                onNextStep()
             }
         }
     }

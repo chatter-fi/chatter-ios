@@ -17,3 +17,7 @@ name_input.placeholder = "Write your name";
 name_input.error_min_length = "At least 4 characters.";
 name_input.error_max_length = "Max. 10 characters.";
 name_input.valid = "Looks great!";
+
+getting_start.welcome = "Welcome";
+getting_start.your_wallet_addr = "Your wallet\naddress is";
+getting_start.start = "Get started";

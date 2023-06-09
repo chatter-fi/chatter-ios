@@ -15,6 +15,7 @@
 		BA78BDDD2A2C473800FF8EF0 /* IntroScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA78BDDC2A2C473800FF8EF0 /* IntroScreen.swift */; };
 		BA78BDDF2A2C473800FF8EF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA78BDDE2A2C473800FF8EF0 /* Assets.xcassets */; };
 		BA78BDE22A2C473800FF8EF0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA78BDE12A2C473800FF8EF0 /* Preview Assets.xcassets */; };
+		BA7D7CEE2A332F1A006BDA6A /* GettingStartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7D7CED2A332F1A006BDA6A /* GettingStartScreen.swift */; };
 		BAA2FEA72A2C823C0009F98C /* AppCore in Frameworks */ = {isa = PBXBuildFile; productRef = BAA2FEA62A2C823C0009F98C /* AppCore */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,7 @@
 		BA78BDDC2A2C473800FF8EF0 /* IntroScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroScreen.swift; sourceTree = "<group>"; };
 		BA78BDDE2A2C473800FF8EF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA78BDE12A2C473800FF8EF0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		BA7D7CED2A332F1A006BDA6A /* GettingStartScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GettingStartScreen.swift; sourceTree = "<group>"; };
 		BAB0E95F2A2C4A0A00D896AB /* BuildTools */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = BuildTools; sourceTree = "<group>"; };
 		BAF977422A2C4A9C0021159A /* Chatter */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Chatter; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -80,6 +82,7 @@
 			children = (
 				BA78BDDA2A2C473800FF8EF0 /* ChatterApp.swift */,
 				BA78BDDC2A2C473800FF8EF0 /* IntroScreen.swift */,
+				BA7D7CED2A332F1A006BDA6A /* GettingStartScreen.swift */,
 				BA6762792A2DF27000C222E0 /* NameInputScreen.swift */,
 				BA46ADE22A2F12BF005929F8 /* WalletCreateLoadingScreen.swift */,
 				BA78BDDE2A2C473800FF8EF0 /* Assets.xcassets */,
@@ -207,6 +210,7 @@
 				BA78BDDD2A2C473800FF8EF0 /* IntroScreen.swift in Sources */,
 				BA46ADE32A2F12BF005929F8 /* WalletCreateLoadingScreen.swift in Sources */,
 				BA67627A2A2DF27000C222E0 /* NameInputScreen.swift in Sources */,
+				BA7D7CEE2A332F1A006BDA6A /* GettingStartScreen.swift in Sources */,
 				BA78BDDB2A2C473800FF8EF0 /* ChatterApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -120,7 +120,10 @@ struct NameInputScreen: View {
                 Spacer()
                 CTButton(
                     labelKey: "next",
-                    onClick: onNextButtonClick
+                    onClick: {
+                        UserDefaults.standard.setValue(nameFieldValue, forKey: "rocketdan.venom.Chatter.username")
+                        onNextButtonClick()
+                    }
                 )
             }
             .padding(.bottom, 24)
