@@ -1,9 +1,8 @@
+// Copyright (c) 2023 Rocketdan
 //
-//  ChatterApp.swift
-//  Chatter
-//
-//  Created by 도라도라 on 2023/06/04.
-//
+// Chatter Venom iOS Project
+// File Name : ChatterApp.swift
+// Description : App Entrypoint
 
 import AppCore
 import SwiftUI
@@ -16,6 +15,10 @@ struct ChatterApp: App {
         WindowGroup {
             NavigationStack(path: $routes) {
                 ZStack {
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                        .controlSize(.large)
+
                     Color.clear
                         .navigationDestination(for: CTNavigationScreenRoute.self) { screenRoute in
                             switch screenRoute {
@@ -41,7 +44,23 @@ struct ChatterApp: App {
                                 )
                                 .navigationBarBackButtonHidden()
                             case .gettingStart:
-                                GettingStartScreen()
+                                GettingStartScreen(
+                                    onGettingStartedClick: {
+                                        UIView.setAnimationsEnabled(false)
+                                        routes = []
+
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                            UIView.setAnimationsEnabled(true)
+                                        }
+
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                            routes.append(.main)
+                                        }
+                                    }
+                                )
+                                .navigationBarBackButtonHidden()
+                            case .main:
+                                MainScreen()
                                     .navigationBarBackButtonHidden()
                             }
                         }
@@ -49,6 +68,7 @@ struct ChatterApp: App {
             }
             .frame(minWidth: 0, maxWidth: .infinity)
             .frame(minHeight: 0, maxHeight: .infinity)
+            .background(Color("ColorMono800", bundle: .appResources))
             .onAppear {
                 if UserDefaults.standard.value(forKey: "rocketdan.venom.Chatter.username") == nil {
                     routes = [.intro]

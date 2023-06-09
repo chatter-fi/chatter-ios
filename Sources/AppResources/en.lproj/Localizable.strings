@@ -21,3 +21,15 @@ name_input.valid = "Looks great!";
 getting_start.welcome = "Welcome";
 getting_start.your_wallet_addr = "Your wallet\naddress is";
 getting_start.start = "Get started";
+
+main.wallet_title = "%@’s Wallet";
+main.title = "What can I do for you?";
+
+main.example.buy = "Buy";
+main.example.buy_description = "“Wanna buy 100 Venom”";
+main.example.send = "Send";
+main.example.send_description = "“Send 200 Venom to +821012345678”";
+main.example.swap = "Swap";
+main.example.swap_description = "“Swap 500 Venom to ETH”";
+main.example.stake = "Stake";
+main.example.stake_description = "“Stake 100 Venom for most valuable APY”";

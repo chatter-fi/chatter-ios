@@ -125,6 +125,8 @@ struct NameInputScreen: View {
                         onNextButtonClick()
                     }
                 )
+                .disabled(nameFieldValue.isEmpty)
+                .opacity(nameFieldValue.isEmpty ? 0.5 : 1.0)
             }
             .padding(.bottom, 24)
             .padding(.horizontal, 40)

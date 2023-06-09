@@ -15,6 +15,10 @@ struct GettingStartScreen: View {
     @State private var address: String = ""
     @State private var addressDisplayable: String = ""
 
+    @State private var viewOpacity: CGFloat = 1.0
+
+    let onGettingStartedClick: () -> Void
+
     var body: some View {
         VStack(spacing: 0) {
             Spacer()
@@ -65,12 +69,21 @@ struct GettingStartScreen: View {
                 labelKey: "getting_start.start",
                 onClick: {
                     HapticManager.shared.hapticNotification(type: .success)
+
+                    withAnimation(.easeOut(duration: 0.5)) {
+                        viewOpacity = 0.0
+                    }
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        onGettingStartedClick()
+                    }
                 }
             )
             .disabled(addressDisplayable.isEmpty)
             .opacity(addressDisplayable.isEmpty ? 0.5 : 1.0)
             .padding(.bottom, 24)
         }
+        .opacity(viewOpacity)
         .onAppear {
             DispatchQueue.main.async {
                 address = VenomWallet.shared.unlockKeyChainAndGetWalletAddress()

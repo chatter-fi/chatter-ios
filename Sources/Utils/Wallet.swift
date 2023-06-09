@@ -22,7 +22,8 @@ public class VenomWallet {
 
     private init() {
         var config: TSDKClientConfig = .init()
-        config.network = TSDKNetworkConfig(endpoints: ["https://venom-testnet.evercloud.dev/b1073504a34d403891e4c25e41582587/graphql"])
+        // config.network = TSDKNetworkConfig(endpoints: ["https://venom-testnet.evercloud.dev/b1073504a34d403891e4c25e41582587/graphql"])
+        config.network = TSDKNetworkConfig(endpoints: ["https://gql-devnet.venom.network/graphql"])
 
         client = try! TSDKClientModule(config: config)
     }
@@ -115,6 +116,7 @@ public class VenomWallet {
     public func requestDeviceBiometricPermission() {
         let context = LAContext()
         context.localizedReason = "Access your wallet on the keychain"
+        context.localizedCancelTitle = "Access your wallet on the keychain"
         let query: [String: Any] = [kSecClass as String: kSecClassKey,
                                     kSecAttrApplicationTag as String: "rocketdan.venom.Chatter.walletAddress".data(using: .utf8)!,
                                     kSecMatchLimit as String: kSecMatchLimitOne,
@@ -137,7 +139,7 @@ public class VenomWallet {
 
     public func unlockKeyChainAndGetWalletAddress() -> String {
         let context = LAContext()
-        context.localizedReason = "Access your wallet on the device secure enclave area"
+        context.localizedReason = "Access your wallet on the keychain"
 
         let query: [String: Any] = [kSecClass as String: kSecClassKey,
                                     kSecAttrApplicationTag as String: "rocketdan.venom.Chatter.walletAddress".data(using: .utf8)!,
@@ -154,6 +156,7 @@ public class VenomWallet {
                let rawWalletAddress = existingItem[kSecValueData as String] as? Data,
                let address = String(data: rawWalletAddress, encoding: String.Encoding.utf8)
             {
+                print(address)
                 _walletAddress = "0:\(address)"
                 return _walletAddress
             }

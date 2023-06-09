@@ -13,6 +13,7 @@ public enum CTNavigationScreenRoute: String, CTNavigationRoute, Identifiable {
     case nameInputScreen
     case walletCreateLoadingScreen
     case gettingStart
+    case main
 
     public var id: String {
         return rawValue
