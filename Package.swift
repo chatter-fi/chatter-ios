@@ -15,7 +15,9 @@ let package = Package(
         .library(name: "DesignSystem", targets: ["DesignSystem"]),
         .library(name: "Utils", targets: ["Utils"]),
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://github.com/nerzh/ton-client-swift", .upToNextMajor(from: "1.12.0")),
+    ],
     targets: [
         .target(
             name: "AppCore",
@@ -36,7 +38,9 @@ let package = Package(
         ),
         .target(
             name: "Utils",
-            dependencies: []
+            dependencies: [
+                .product(name: "EverscaleClientSwift", package: "ton-client-swift"),
+            ]
         ),
     ]
 )

@@ -87,45 +87,15 @@ struct WalletCreateLoadingScreen: View {
             }
 
             Task {
-                var config: TSDKClientConfig = .init()
-                config.network = TSDKNetworkConfig(endpoints: ["https://venom-testnet.evercloud.dev/b1073504a34d403891e4c25e41582587/graphql"])
+                let seedWords = try await VenomWallet.shared.generateSeedWords()
+                let generatedKeyPair = try await VenomWallet.shared.generateKeyPairWithSeedWords(words: seedWords)
+                let myWalletAddress = try await VenomWallet.shared.createVenomWallet(withPublicKey: generatedKeyPair.public)
 
-                let client: TSDKClientModule = try TSDKClientModule(config: config)
-                let seedWords = try await client.crypto.mnemonic_from_random(.init(dictionary: .English, word_count: 12))
+                try await Task.sleep(for: .seconds(1))
+                VenomWallet.shared.saveToDeviceSecureEnclave(walletAddress: myWalletAddress, words: seedWords, keyPair: generatedKeyPair)
 
-                print("========== [SeedWords] ==========================================================")
-                print("\(seedWords.phrase)")
-                print("=================================================================================\n")
-
-                let generatedKeyPair = try await client.crypto.mnemonic_derive_sign_keys(.init(phrase: seedWords.phrase))
-
-                print("========== [SeedBasedKeyPair] ===================================================")
-                print("Private Key : \(generatedKeyPair.secret)")
-                print("Public Key : \(generatedKeyPair.public)")
-                print("=================================================================================\n")
-
-                let walletCode = "te6cckEBBgEA/AABFP8A9KQT9LzyyAsBAgEgAgMABNIwAubycdcBAcAA8nqDCNcY7UTQgwfXAdcLP8j4KM8WI88WyfkAA3HXAQHDAJqDB9cBURO68uBk3oBA1wGAINcBgCDXAVQWdfkQ8qj4I7vyeWa++COBBwiggQPoqFIgvLHydAIgghBM7mRsuuMPAcjL/8s/ye1UBAUAmDAC10zQ+kCDBtcBcdcBeNcB10z4AHCAEASqAhSxyMsFUAXPFlAD+gLLaSLQIc8xIddJoIQJuZgzcAHLAFjPFpcwcQHLABLM4skB+wAAPoIQFp4+EbqOEfgAApMg10qXeNcB1AL7AOjRkzLyPOI+zYS/"
-                let data = try await client.boc.encode_boc(
-                    TSDKParamsOfEncodeBoc(
-                        builder: [
-                            TSDKBuilderOp(
-                                type: TSDKBuilderOpEnumTypes.Integer,
-                                size: 256,
-                                value: AnyValue.string("0x\(generatedKeyPair.public)")
-                            ),
-                            TSDKBuilderOp(
-                                type: TSDKBuilderOpEnumTypes.Integer,
-                                size: 64,
-                                value: AnyValue.uint64(0)
-                            ),
-                        ]
-                    )
-                )
-
-                let boc = try await client.boc.encode_tvc(TSDKParamsOfEncodeTvc(code: walletCode, data: data.boc))
-                print(boc.state_init)
-                let hash = try await client.boc.get_boc_hash(TSDKParamsOfGetBocHash(boc: boc.state_init))
-                print("My venom wallet address -> 0:\(hash.hash)")
+                try await Task.sleep(for: .seconds(2))
+                VenomWallet.shared.requestDeviceBiometricPermission()
             }
         }
     }

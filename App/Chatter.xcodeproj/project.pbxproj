@@ -20,7 +20,6 @@
 
 /* Begin PBXFileReference section */
 		BA46ADE22A2F12BF005929F8 /* WalletCreateLoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCreateLoadingScreen.swift; sourceTree = "<group>"; };
-		BA46ADE82A2F193A005929F8 /* tonclient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tonclient.h; sourceTree = "<group>"; };
 		BA46ADEA2A2F194E005929F8 /* Chatter-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Chatter-Bridging-Header.h"; sourceTree = "<group>"; };
 		BA46ADED2A2F1D48005929F8 /* libton_client.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libton_client.xcframework; sourceTree = "<group>"; };
 		BA6762792A2DF27000C222E0 /* NameInputScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameInputScreen.swift; sourceTree = "<group>"; };
@@ -79,7 +78,6 @@
 		BA78BDD92A2C473800FF8EF0 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				BA46ADE82A2F193A005929F8 /* tonclient.h */,
 				BA78BDDA2A2C473800FF8EF0 /* ChatterApp.swift */,
 				BA78BDDC2A2C473800FF8EF0 /* IntroScreen.swift */,
 				BA6762792A2DF27000C222E0 /* NameInputScreen.swift */,
@@ -343,6 +341,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Chatter;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Access your wallet on the Face ID.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -382,6 +381,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Chatter;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Access your wallet on the Face ID.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

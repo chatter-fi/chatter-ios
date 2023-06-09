@@ -9,11 +9,6 @@ import DesignSystem
 import SwiftUI
 
 struct IntroScreen: View {
-    @GestureState private var press: Bool = false
-    @State private var isButtonPressed: Bool = false
-    @State private var buttonScale: CGFloat = 1.0
-    @State private var buttonOpacity: CGFloat = 1.0
-
     @State private var backgroundViewScale: CGFloat = 1.0
     @State private var backgroundViewOpacity: CGFloat = 1.0
 
@@ -37,30 +32,28 @@ struct IntroScreen: View {
                 .padding(.horizontal, 20)
                 .scaleEffect(mainContainerScale)
                 .opacity(mainContainerOpacity)
-                HStack {
-                    Spacer()
-                    Text("intro.generate_new_wallet", bundle: .appResources)
-                        .font(.system(size: 16, weight: .semibold))
-                        .foregroundColor(Color("ColorMono800", bundle: .appResources))
-                        .padding(.vertical, 12)
-                    Spacer()
-                }
-                .background(
-                    RoundedRectangle(cornerRadius: 24)
-                        .foregroundColor(Color("ColorMono100", bundle: .appResources))
-                )
-                .padding(.horizontal, 16)
-                .padding(.top, 44)
-                .scaleEffect(isButtonPressed ? 0.95 : 1.0)
-                .opacity(isButtonPressed ? 0.8 : 1.0)
-                .gesture(
-                    LongPressGesture(minimumDuration: 5, maximumDistance: 50)
-                        .updating($press) { currentState, gestureState, _ in
-                            gestureState = currentState
+
+                CTButton(
+                    labelKey: "intro.generate_new_wallet",
+                    onClick: {
+                        withAnimation(.easeInOut(duration: 2)) {
+                            backgroundViewOpacity = 0.0
+                            backgroundViewScale = 2.0
+
+                            mainContainerScale = 0.8
+                            mainContainerOpacity = 0
+
+                            progressBarOpacity = 1.0
                         }
+
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                            onNewWalletButtonClick()
+                        }
+                    }
                 )
                 .scaleEffect(mainContainerScale)
                 .opacity(mainContainerOpacity)
+
                 Button(action: {}) {
                     HStack {
                         Spacer()
@@ -97,27 +90,6 @@ struct IntroScreen: View {
                 .padding(.zero)
             )
             .edgesIgnoringSafeArea(.all)
-            .onChange(of: press) { press in
-                withAnimation {
-                    isButtonPressed = press
-                }
-
-                if !press {
-                    withAnimation(.easeInOut(duration: 2)) {
-                        backgroundViewOpacity = 0.0
-                        backgroundViewScale = 2.0
-
-                        mainContainerScale = 0.8
-                        mainContainerOpacity = 0
-
-                        progressBarOpacity = 1.0
-                    }
-
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                        onNewWalletButtonClick()
-                    }
-                }
-            }
 
             ProgressView()
                 .progressViewStyle(.circular)

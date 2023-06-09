@@ -5,6 +5,7 @@
 // Description : Name Input Screen
 
 import AppResources
+import DesignSystem
 import SwiftUI
 
 struct NameInputScreen: View {
@@ -14,11 +15,6 @@ struct NameInputScreen: View {
     @State private var formErrorType: FormErrorType? = nil
 
     @FocusState private var focusedField: FormField?
-
-    @GestureState private var press: Bool = false
-    @State private var isButtonPressed: Bool = false
-    @State private var buttonScale: CGFloat = 1.0
-    @State private var buttonOpacity: CGFloat = 1.0
 
     let onNextButtonClick: () -> Void
 
@@ -119,39 +115,12 @@ struct NameInputScreen: View {
                     }
                 }
             }
-            .onChange(of: press) { press in
-                withAnimation {
-                    isButtonPressed = press
-                }
-
-                if !press {
-                    onNextButtonClick()
-                }
-            }
 
             VStack {
                 Spacer()
-                HStack {
-                    Spacer()
-                    Text("next", bundle: .appResources)
-                        .font(.system(size: 16, weight: .semibold))
-                        .foregroundColor(formErrorType == .noError ? Color("ColorMono800", bundle: .appResources) : Color("ColorMono600", bundle: .appResources))
-                        .padding(.vertical, 12)
-                    Spacer()
-                }
-                .background(
-                    RoundedRectangle(cornerRadius: 24)
-                        .foregroundColor(formErrorType == .noError ? Color("ColorMono100", bundle: .appResources) : Color("ColorMono500", bundle: .appResources))
-                )
-                .disabled(formErrorType == nil)
-                .padding(.top, 44)
-                .scaleEffect(isButtonPressed ? 0.95 : 1.0)
-                .opacity(isButtonPressed ? 0.8 : 1.0)
-                .gesture(
-                    LongPressGesture(minimumDuration: 5, maximumDistance: 50)
-                        .updating($press) { currentState, gestureState, _ in
-                            gestureState = currentState
-                        }
+                CTButton(
+                    labelKey: "next",
+                    onClick: onNextButtonClick
                 )
             }
             .padding(.bottom, 24)
