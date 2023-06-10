@@ -9,13 +9,16 @@ import SwiftUI
 
 public struct CTButton: View {
     let labelKey: String
+    let typeCancel: Bool
     let onClick: () -> Void
 
     public init(
         labelKey: String,
+        typeCancel: Bool = false,
         onClick: @escaping () -> Void
     ) {
         self.labelKey = labelKey
+        self.typeCancel = typeCancel
         self.onClick = onClick
     }
 
@@ -29,13 +32,15 @@ public struct CTButton: View {
             Spacer()
             Text(NSLocalizedString(labelKey, bundle: .appResources, comment: ""))
                 .font(.system(size: 16, weight: .semibold))
-                .foregroundColor(Color("ColorMono800", bundle: .appResources))
+                .foregroundColor(!typeCancel ? Color("ColorMono800", bundle: .appResources) : Color.white)
                 .padding(.vertical, 12)
             Spacer()
         }
         .background(
             RoundedRectangle(cornerRadius: 24)
-                .foregroundColor(Color("ColorMono100", bundle: .appResources))
+                .strokeBorder(!typeCancel ? Color.clear : Color.white, lineWidth: 1)
+                .background(!typeCancel ? Color("ColorMono100", bundle: .appResources) : Color.clear)
+                .clipShape(RoundedRectangle(cornerRadius: 24))
         )
         .padding(.horizontal, 16)
         .padding(.top, 44)

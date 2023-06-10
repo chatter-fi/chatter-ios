@@ -6,6 +6,7 @@
 
 import AppCore
 import SwiftUI
+import WalletCore
 
 @main
 struct ChatterApp: App {
@@ -73,7 +74,8 @@ struct ChatterApp: App {
                 if UserDefaults.standard.value(forKey: "rocketdan.venom.Chatter.username") == nil {
                     routes = [.intro]
                 } else {
-                    routes = [.gettingStart]
+                    _ = VenomWallet.shared.unlockKeyChainAndGetWalletAddress()
+                    routes = [.main]
                 }
             }
         }

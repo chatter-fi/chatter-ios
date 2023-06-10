@@ -33,3 +33,6 @@ main.example.swap = "Swap";
 main.example.swap_description = "“Swap 500 Venom to ETH”";
 main.example.stake = "Stake";
 main.example.stake_description = "“Stake 100 Venom for most valuable APY”";
+
+main.approve = "Approve";
+main.cancel = "Cancel";

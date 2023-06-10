@@ -34,6 +34,7 @@
 		BA7D7CED2A332F1A006BDA6A /* GettingStartScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GettingStartScreen.swift; sourceTree = "<group>"; };
 		BA7D7CEF2A336943006BDA6A /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		BA7D7CF22A33727A006BDA6A /* MainScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewModel.swift; sourceTree = "<group>"; };
+		BA7D7CF42A347C5D006BDA6A /* Chatter-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Chatter-Info.plist"; sourceTree = "<group>"; };
 		BAB0E95F2A2C4A0A00D896AB /* BuildTools */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = BuildTools; sourceTree = "<group>"; };
 		BAF977422A2C4A9C0021159A /* Chatter */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Chatter; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -64,6 +65,7 @@
 		BA78BDCE2A2C473800FF8EF0 = {
 			isa = PBXGroup;
 			children = (
+				BA7D7CF42A347C5D006BDA6A /* Chatter-Info.plist */,
 				BA46ADE62A2F193A005929F8 /* TonSDK */,
 				BAF977422A2C4A9C0021159A /* Chatter */,
 				BAB0E95F2A2C4A0A00D896AB /* BuildTools */,
@@ -360,7 +362,9 @@
 				DEVELOPMENT_TEAM = T7Q559P978;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Chatter-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Chatter;
+				INFOPLIST_KEY_NSContactsUsageDescription = "We can send a text message with instructions on how to claim sended tokens.";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Access your wallet on the Face ID.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "You can control your wallet through voice commands.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Recognize spoken voice data and use it for wallet commands.";
@@ -402,7 +406,9 @@
 				DEVELOPMENT_TEAM = T7Q559P978;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Chatter-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Chatter;
+				INFOPLIST_KEY_NSContactsUsageDescription = "We can send a text message with instructions on how to claim sended tokens.";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Access your wallet on the Face ID.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "You can control your wallet through voice commands.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Recognize spoken voice data and use it for wallet commands.";

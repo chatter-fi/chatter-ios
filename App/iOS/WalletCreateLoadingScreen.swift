@@ -90,17 +90,22 @@ struct WalletCreateLoadingScreen: View {
             }
 
             Task {
-                let seedWords = try await VenomWallet.shared.generateSeedWords()
-                let generatedKeyPair = try await VenomWallet.shared.generateKeyPairWithSeedWords(words: seedWords)
-                let myWalletAddress = try await VenomWallet.shared.createVenomWallet(withPublicKey: generatedKeyPair.public)
-
                 try await Task.sleep(for: .seconds(1))
-                VenomWallet.shared.saveToDeviceSecureEnclave(walletAddress: myWalletAddress, words: seedWords, keyPair: generatedKeyPair)
 
                 try await Task.sleep(for: .seconds(2))
                 VenomWallet.shared.requestDeviceBiometricPermission()
 
-                try await Task.sleep(for: .seconds(1))
+                let alreadyGeneratedWalletId = VenomWallet.shared.unlockKeyChainAndGetWalletAddress()
+                if alreadyGeneratedWalletId.isEmpty {
+                    let seedWords = try await VenomWallet.shared.generateSeedWords()
+                    let generatedKeyPair = try await VenomWallet.shared.generateKeyPairWithSeedWords(words: seedWords)
+                    let myWalletAddress = try await VenomWallet.shared.createVenomWallet(withPublicKey: generatedKeyPair.public)
+
+                    try await Task.sleep(for: .seconds(1))
+                    VenomWallet.shared.saveToDeviceSecureEnclave(walletAddress: myWalletAddress, words: seedWords, keyPair: generatedKeyPair)
+
+                    try await Task.sleep(for: .seconds(1))
+                }
 
                 onNextStep()
             }

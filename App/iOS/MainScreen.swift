@@ -7,6 +7,7 @@
 import AppResources
 import DesignSystem
 import Foundation
+import Model
 import SpeechRecognitionCore
 import SwiftUI
 import Utils
@@ -19,6 +20,10 @@ struct MainScreen: View {
     @State private var isWalletInfoCardMinimized: Bool = false
 
     @StateObject var speechRecognizer = SpeechRecognizer()
+
+    @State private var requestId: UUID = .init()
+
+    @Namespace private var bottomViewId
 
     var body: some View {
         ZStack {
@@ -41,154 +46,241 @@ struct MainScreen: View {
                 .padding(.bottom, 12)
                 .background(BackdropBlurView(radius: 25))
                 .padding(.horizontal, 20)
-                GeometryReader { geometry in
-                    ScrollView {
-                        LazyVStack(spacing: 0, pinnedViews: [.sectionHeaders]) {
-                            Section {
-                                if !isWalletInfoCardMinimized {
-                                    HStack {
-                                        Text("main.title", bundle: .appResources)
-                                            .font(.system(size: 28, weight: .medium, design: .serif))
-                                            .foregroundColor(Color("ColorMono100", bundle: .appResources))
-                                        Spacer()
-                                    }
-                                    .padding(.top, 32)
-                                    .padding(.bottom, 24)
-                                    .padding(.horizontal, 20)
-
-                                    ExampleItem(
-                                        iconKey: "IconBuy",
-                                        titleKey: "main.example.buy",
-                                        descriptionKey: "main.example.buy_description"
-                                    )
-                                    .padding(.horizontal, 20)
-                                    .padding(.bottom, 16)
-                                    ExampleItem(
-                                        iconKey: "IconSend",
-                                        titleKey: "main.example.send",
-                                        descriptionKey: "main.example.send_description"
-                                    )
-                                    .padding(.horizontal, 20)
-                                    .padding(.bottom, 16)
-                                    ExampleItem(
-                                        iconKey: "IconSwap",
-                                        titleKey: "main.example.swap",
-                                        descriptionKey: "main.example.swap_description"
-                                    )
-                                    .padding(.horizontal, 20)
-                                    .padding(.bottom, 16)
-
-                                    ExampleItem(
-                                        iconKey: "IconStake",
-                                        titleKey: "main.example.stake",
-                                        descriptionKey: "main.example.stake_description"
-                                    )
-                                    .padding(.horizontal, 20)
-                                    .padding(.bottom, 16)
-                                } else {
-                                    ZStack {}
-                                        .frame(minHeight: geometry.size.height - 200)
-                                    Text(viewModel.currentTranscript)
-                                }
-                            } header: {
-                                VStack(spacing: 0) {
-                                    var formattedWalletTitle: String {
-                                        let localizedString = NSLocalizedString("main.wallet_title", bundle: .appResources, comment: "Wallet title")
-                                        return String(format: localizedString, UserDefaults.standard.string(forKey: "rocketdan.venom.Chatter.username") ?? "")
-                                    }
-
-                                    var simpleWalletAddress: String {
-                                        let walletAddress = VenomWallet.shared.walletAddress
-
-                                        return "(\(walletAddress.substring(with: 0 ..< 5))...\(walletAddress.substring(from: walletAddress.count - 5)))"
-                                    }
-
-                                    HStack(spacing: 4) {
-                                        Text(formattedWalletTitle)
-                                            .font(.system(size: 16, weight: .medium))
-                                            .foregroundColor(Color("ColorMono100", bundle: .appResources))
-
-                                        if !isWalletInfoCardMinimized {
-                                            Text(simpleWalletAddress)
-                                                .font(.system(size: 12, weight: .medium, design: .monospaced))
-                                                .foregroundColor(Color("ColorMono400", bundle: .appResources))
-                                        } else {
-                                            Spacer()
-                                            HStack(spacing: 0) {
-                                                Text(viewModel.formattedTotalBalance)
-                                                    .font(.system(size: 16, weight: .semibold))
-                                                    .foregroundColor(Color("ColorMono100", bundle: .appResources))
-                                                Image(systemName: "chevron.right")
-                                                    .font(.system(size: 10, weight: .heavy))
-                                                    .foregroundColor(Color("ColorMono100", bundle: .appResources))
-                                            }
-                                        }
-
-                                        if !isWalletInfoCardMinimized {
-                                            Spacer()
-                                        }
-                                    }
-
+                GeometryReader { reader in
+                    ScrollViewReader { scrollReader in
+                        ScrollView {
+                            LazyVStack(spacing: 0, pinnedViews: [.sectionHeaders]) {
+                                Section {
                                     if !isWalletInfoCardMinimized {
-                                        HStack(spacing: 8) {
-                                            Text(viewModel.formattedTotalBalance)
-                                                .font(.system(size: 28, weight: .semibold))
+                                        HStack {
+                                            Text("main.title", bundle: .appResources)
+                                                .font(.system(size: 28, weight: .medium, design: .serif))
                                                 .foregroundColor(Color("ColorMono100", bundle: .appResources))
-
-                                            Text(viewModel.formattedBalanceDifferencePercentage)
-                                                .font(.system(size: 12, weight: .medium))
-                                                .foregroundColor(Color("ColorGreenLight", bundle: .appResources))
-                                                .padding(.horizontal, 8)
-                                                .padding(.vertical, 4)
-                                                .background(
-                                                    RoundedRectangle(cornerRadius: 8)
-                                                        .foregroundColor(Color("ColorGreenHeavy", bundle: .appResources))
-                                                )
                                             Spacer()
                                         }
-                                        .padding(.top, 12)
+                                        .padding(.top, 32)
+                                        .padding(.bottom, 24)
+                                        .padding(.horizontal, 20)
 
-                                        TokenCard(
-                                            tokenName: "VENOM",
-                                            balance: 250,
-                                            tokenValue: 0.23910,
-                                            tokenDiffPercentage: 0.0
+                                        ExampleItem(
+                                            iconKey: "IconBuy",
+                                            titleKey: "main.example.buy",
+                                            descriptionKey: "main.example.buy_description"
                                         )
-                                        .padding(.top, 20)
-                                        TokenCard(
-                                            tokenName: "ETH",
-                                            balance: 0,
-                                            tokenValue: 1845.68000000,
-                                            tokenDiffPercentage: 2.98
+                                        .padding(.horizontal, 20)
+                                        .padding(.bottom, 16)
+                                        ExampleItem(
+                                            iconKey: "IconSend",
+                                            titleKey: "main.example.send",
+                                            descriptionKey: "main.example.send_description"
                                         )
-                                        .padding(.top, 4)
-                                        TokenCard(
-                                            tokenName: "BTC",
-                                            balance: 0,
-                                            tokenValue: 26484.99000000,
-                                            tokenDiffPercentage: 0.01
+                                        .padding(.horizontal, 20)
+                                        .padding(.bottom, 16)
+                                        ExampleItem(
+                                            iconKey: "IconSwap",
+                                            titleKey: "main.example.swap",
+                                            descriptionKey: "main.example.swap_description"
                                         )
-                                        .padding(.top, 4)
-                                        Button(action: {}) {
+                                        .padding(.horizontal, 20)
+                                        .padding(.bottom, 16)
+
+                                        ExampleItem(
+                                            iconKey: "IconStake",
+                                            titleKey: "main.example.stake",
+                                            descriptionKey: "main.example.stake_description"
+                                        )
+                                        .padding(.horizontal, 20)
+                                        .padding(.bottom, 16)
+                                    } else {
+                                        Spacer()
+                                            .frame(height: 195)
+
+                                        ForEach(viewModel.messages, id: \.self) { message in
+                                            var messageString: String {
+                                                if message.content.contains("{") {
+                                                    let reply = try! JSONDecoder().decode(MessageReply.self, from: message.content.data(using: .utf8)!)
+                                                    return reply.text ?? ""
+                                                }
+
+                                                return message.content
+                                            }
                                             HStack {
-                                                Spacer()
-                                                Image(systemName: "chevron.down")
-                                                    .font(.system(size: 14, weight: .heavy))
+                                                Text(messageString)
+                                                    .font(.system(size: 28, weight: .medium, design: .serif))
+                                                    .lineSpacing(5.5)
                                                     .foregroundColor(Color("ColorMono500", bundle: .appResources))
                                                 Spacer()
                                             }
-                                            .contentShape(Rectangle())
-                                            .padding(.top, 14)
-                                            .padding(.bottom, 2)
+                                            .padding(.leading, 20)
+                                            .padding(.trailing, 100)
+                                            .padding(.top, 24)
+                                        }
+
+                                        VStack(spacing: 0) {
+                                            HStack {
+                                                Text(viewModel.currentTranscript)
+                                                    .font(.system(size: 28, weight: .medium, design: .serif))
+                                                    .lineSpacing(5.5)
+                                                    .foregroundColor(Color("ColorMono100", bundle: .appResources))
+                                                Spacer()
+                                            }
+                                            .padding(.leading, 20)
+                                            .padding(.trailing, 100)
+
+                                            if viewModel.currentTranscript.starts(with: "I got") {
+                                                HStack(spacing: 0) {
+                                                    CTButton(labelKey: "main.cancel", typeCancel: true, onClick: {
+                                                        viewModel.cancel()
+                                                    })
+                                                    .frame(width: reader.size.width / 2)
+                                                    .offset(x: 12)
+                                                    CTButton(labelKey: "main.approve", onClick: {
+                                                        viewModel.confirm()
+                                                    })
+                                                    .frame(width: reader.size.width / 2)
+                                                    .offset(x: -12)
+                                                }
+                                            }
+                                        }
+                                        .padding(.top, 24)
+
+                                        ZStack {}
+                                            .frame(height: reader.size.height - 500)
+                                            .id(bottomViewId)
+                                    }
+                                } header: {
+                                    VStack(spacing: 0) {
+                                        var formattedWalletTitle: String {
+                                            let localizedString = NSLocalizedString("main.wallet_title", bundle: .appResources, comment: "Wallet title")
+                                            return String(format: localizedString, UserDefaults.standard.string(forKey: "rocketdan.venom.Chatter.username") ?? "")
+                                        }
+
+                                        var simpleWalletAddress: String {
+                                            let walletAddress = VenomWallet.shared.walletAddress
+
+                                            return "(\(walletAddress.substring(with: 0 ..< 5))...\(walletAddress.substring(from: walletAddress.count - 5)))"
+                                        }
+
+                                        HStack(spacing: 4) {
+                                            Text(formattedWalletTitle)
+                                                .font(.system(size: 16, weight: .medium))
+                                                .foregroundColor(Color("ColorMono100", bundle: .appResources))
+
+                                            if !isWalletInfoCardMinimized {
+                                                Text(simpleWalletAddress)
+                                                    .font(.system(size: 12, weight: .medium, design: .monospaced))
+                                                    .foregroundColor(Color("ColorMono400", bundle: .appResources))
+                                            } else {
+                                                Spacer()
+                                                HStack(spacing: 0) {
+                                                    Text(viewModel.formattedTotalBalance)
+                                                        .font(.system(size: 16, weight: .semibold))
+                                                        .foregroundColor(Color("ColorMono100", bundle: .appResources))
+                                                    Image(systemName: "chevron.right")
+                                                        .font(.system(size: 10, weight: .heavy))
+                                                        .foregroundColor(Color("ColorMono100", bundle: .appResources))
+                                                }
+                                            }
+
+                                            if !isWalletInfoCardMinimized {
+                                                Spacer()
+                                            }
+                                        }
+
+                                        if !isWalletInfoCardMinimized {
+                                            HStack(spacing: 8) {
+                                                Text(viewModel.formattedTotalBalance)
+                                                    .font(.system(size: 28, weight: .semibold))
+                                                    .foregroundColor(Color("ColorMono100", bundle: .appResources))
+
+                                                Text(viewModel.formattedBalanceDifferencePercentage)
+                                                    .font(.system(size: 12, weight: .medium))
+                                                    .foregroundColor(Color("ColorGreenLight", bundle: .appResources))
+                                                    .padding(.horizontal, 8)
+                                                    .padding(.vertical, 4)
+                                                    .background(
+                                                        RoundedRectangle(cornerRadius: 8)
+                                                            .foregroundColor(Color("ColorGreenHeavy", bundle: .appResources))
+                                                    )
+                                                Spacer()
+                                            }
+                                            .padding(.top, 12)
+
+                                            TokenCard(
+                                                tokenName: "VENOM",
+                                                balance: 250,
+                                                tokenValue: 0.23910,
+                                                tokenDiffPercentage: 0.0
+                                            )
+                                            .padding(.top, 20)
+                                            TokenCard(
+                                                tokenName: "ETH",
+                                                balance: 0,
+                                                tokenValue: 1845.68000000,
+                                                tokenDiffPercentage: 2.98
+                                            )
+                                            .padding(.top, 4)
+                                            TokenCard(
+                                                tokenName: "BTC",
+                                                balance: 0,
+                                                tokenValue: 26484.99000000,
+                                                tokenDiffPercentage: 0.01
+                                            )
+                                            .padding(.top, 4)
+                                            Button(action: {}) {
+                                                HStack {
+                                                    Spacer()
+                                                    Image(systemName: "chevron.down")
+                                                        .font(.system(size: 14, weight: .heavy))
+                                                        .foregroundColor(Color("ColorMono500", bundle: .appResources))
+                                                    Spacer()
+                                                }
+                                                .contentShape(Rectangle())
+                                                .padding(.top, 14)
+                                                .padding(.bottom, 2)
+                                            }
+                                        }
+                                    }
+                                    .padding(16)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 16)
+                                            .foregroundColor(Color("ColorMono700", bundle: .appResources))
+                                    )
+                                    .padding(.horizontal, 20)
+                                    .onChange(of: viewModel.messages) { _ in
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                            withAnimation {
+                                                scrollReader.scrollTo(bottomViewId, anchor: .bottom)
+                                            }
+                                        }
+                                    }
+                                    .onChange(of: requestId) { _ in
+                                        DispatchQueue.main.async {
+                                            withAnimation {
+                                                scrollReader.scrollTo(bottomViewId, anchor: .bottom)
+                                            }
+                                        }
+
+                                        withAnimation {
+                                            isWalletInfoCardMinimized = true
+                                        }
+
+                                        if viewModel.voiceRecognitionStatus == .idle {
+                                            viewModel.insertPreviousMessage()
+                                            viewModel.updateCurrentTranscript("")
+
+                                            speechRecognizer.resetTranscript()
+                                            speechRecognizer.startTranscribing()
+
+                                            viewModel.voiceRecognitionStatus = .voiceRecognizing
+                                            return
+                                        }
+
+                                        if viewModel.voiceRecognitionStatus == .voiceRecognizing {
+                                            viewModel.voiceRecognitionStatus = .processing
                                         }
                                     }
                                 }
-                                .padding(16)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 16)
-                                        .foregroundColor(Color("ColorMono700", bundle: .appResources))
-                                )
-                                .padding(.horizontal, 20)
                             }
                         }
                     }
@@ -197,20 +289,7 @@ struct MainScreen: View {
             VStack {
                 Spacer()
                 Button(action: {
-                    withAnimation {
-                        isWalletInfoCardMinimized = true
-                    }
-
-                    if viewModel.voiceRecognitionStatus == .idle {
-                        viewModel.voiceRecognitionStatus = .voiceRecognizing
-                        speechRecognizer.resetTranscript()
-                        speechRecognizer.startTranscribing()
-                        return
-                    }
-
-                    if viewModel.voiceRecognitionStatus == .voiceRecognizing {
-                        viewModel.voiceRecognitionStatus = .processing
-                    }
+                    requestId = .init()
                 }) {
                     CTVoiceProcessingIndicator(
                         currentState: $currentVoiceRecognitionStatus
@@ -249,10 +328,9 @@ struct MainScreen: View {
                         }
 
                         if status == .processing {
-                            // TODO: Request to Server
                             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                viewModel.voiceRecognitionStatus = .idle
                                 speechRecognizer.stopTranscribing()
+                                viewModel.processMessage()
                             }
                         }
                     }
