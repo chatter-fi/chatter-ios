@@ -11,6 +11,7 @@ import WalletCore
 @main
 struct ChatterApp: App {
     @State private var routes: [CTNavigationScreenRoute] = []
+    @State private var fromDeeplink: Bool = false
 
     var body: some Scene {
         WindowGroup {
@@ -56,12 +57,27 @@ struct ChatterApp: App {
 
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                             routes.append(.main)
+                                            routes.append(.onboarding)
                                         }
                                     }
                                 )
                                 .navigationBarBackButtonHidden()
                             case .main:
                                 MainScreen()
+                                    .navigationBarBackButtonHidden()
+                            case .receiveToken:
+                                ReceiveTokenScreen(
+                                    onCreateWalletButtonClick: {
+                                        _ = routes.popLast()
+
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                            routes.append(.nameInputScreen)
+                                        }
+                                    }
+                                )
+                                .navigationBarBackButtonHidden()
+                            case .onboarding:
+                                OnboardingScreen()
                                     .navigationBarBackButtonHidden()
                             }
                         }
@@ -71,12 +87,22 @@ struct ChatterApp: App {
             .frame(minHeight: 0, maxHeight: .infinity)
             .background(Color("ColorMono800", bundle: .appResources))
             .onAppear {
-                if UserDefaults.standard.value(forKey: "rocketdan.venom.Chatter.username") == nil {
-                    routes = [.intro]
-                } else {
-                    _ = VenomWallet.shared.unlockKeyChainAndGetWalletAddress()
-                    routes = [.main]
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    if !fromDeeplink {
+                        if UserDefaults.standard.value(forKey: "rocketdan.venom.Chatter.username") == nil {
+                            routes = [.intro]
+                        } else {
+                            _ = VenomWallet.shared.unlockKeyChainAndGetWalletAddress()
+                            routes = [.main, .onboarding]
+                        }
+                    }
                 }
+            }
+            .onOpenURL { url in
+                fromDeeplink = true
+                print(url)
+
+                routes = [.receiveToken]
             }
         }
     }

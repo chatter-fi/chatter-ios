@@ -18,6 +18,9 @@
 		BA7D7CEE2A332F1A006BDA6A /* GettingStartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7D7CED2A332F1A006BDA6A /* GettingStartScreen.swift */; };
 		BA7D7CF02A336943006BDA6A /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7D7CEF2A336943006BDA6A /* MainScreen.swift */; };
 		BA7D7CF32A33727A006BDA6A /* MainScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7D7CF22A33727A006BDA6A /* MainScreenViewModel.swift */; };
+		BA7D7CF62A349F60006BDA6A /* ReceiveTokenScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7D7CF52A349F60006BDA6A /* ReceiveTokenScreen.swift */; };
+		BA7D7CF82A34A7BE006BDA6A /* chatter_onboarding.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = BA7D7CF72A34A7BB006BDA6A /* chatter_onboarding.mp4 */; };
+		BA7D7CFA2A34A7DA006BDA6A /* OnboardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7D7CF92A34A7DA006BDA6A /* OnboardingScreen.swift */; };
 		BAA2FEA72A2C823C0009F98C /* AppCore in Frameworks */ = {isa = PBXBuildFile; productRef = BAA2FEA62A2C823C0009F98C /* AppCore */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +38,9 @@
 		BA7D7CEF2A336943006BDA6A /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		BA7D7CF22A33727A006BDA6A /* MainScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewModel.swift; sourceTree = "<group>"; };
 		BA7D7CF42A347C5D006BDA6A /* Chatter-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Chatter-Info.plist"; sourceTree = "<group>"; };
+		BA7D7CF52A349F60006BDA6A /* ReceiveTokenScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveTokenScreen.swift; sourceTree = "<group>"; };
+		BA7D7CF72A34A7BB006BDA6A /* chatter_onboarding.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = chatter_onboarding.mp4; sourceTree = "<group>"; };
+		BA7D7CF92A34A7DA006BDA6A /* OnboardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreen.swift; sourceTree = "<group>"; };
 		BAB0E95F2A2C4A0A00D896AB /* BuildTools */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = BuildTools; sourceTree = "<group>"; };
 		BAF977422A2C4A9C0021159A /* Chatter */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Chatter; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -86,13 +92,16 @@
 		BA78BDD92A2C473800FF8EF0 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				BA7D7CF72A34A7BB006BDA6A /* chatter_onboarding.mp4 */,
 				BA7D7CF12A337262006BDA6A /* ViewModels */,
 				BA78BDDA2A2C473800FF8EF0 /* ChatterApp.swift */,
 				BA78BDDC2A2C473800FF8EF0 /* IntroScreen.swift */,
 				BA7D7CED2A332F1A006BDA6A /* GettingStartScreen.swift */,
 				BA7D7CEF2A336943006BDA6A /* MainScreen.swift */,
 				BA6762792A2DF27000C222E0 /* NameInputScreen.swift */,
+				BA7D7CF52A349F60006BDA6A /* ReceiveTokenScreen.swift */,
 				BA46ADE22A2F12BF005929F8 /* WalletCreateLoadingScreen.swift */,
+				BA7D7CF92A34A7DA006BDA6A /* OnboardingScreen.swift */,
 				BA78BDDE2A2C473800FF8EF0 /* Assets.xcassets */,
 				BA78BDE02A2C473800FF8EF0 /* Preview Content */,
 				BA46ADEA2A2F194E005929F8 /* Chatter-Bridging-Header.h */,
@@ -192,6 +201,7 @@
 			files = (
 				BA78BDE22A2C473800FF8EF0 /* Preview Assets.xcassets in Resources */,
 				BA78BDDF2A2C473800FF8EF0 /* Assets.xcassets in Resources */,
+				BA7D7CF82A34A7BE006BDA6A /* chatter_onboarding.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,8 +238,10 @@
 				BA78BDDD2A2C473800FF8EF0 /* IntroScreen.swift in Sources */,
 				BA46ADE32A2F12BF005929F8 /* WalletCreateLoadingScreen.swift in Sources */,
 				BA67627A2A2DF27000C222E0 /* NameInputScreen.swift in Sources */,
+				BA7D7CFA2A34A7DA006BDA6A /* OnboardingScreen.swift in Sources */,
 				BA7D7CEE2A332F1A006BDA6A /* GettingStartScreen.swift in Sources */,
 				BA78BDDB2A2C473800FF8EF0 /* ChatterApp.swift in Sources */,
+				BA7D7CF62A349F60006BDA6A /* ReceiveTokenScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -208,23 +208,23 @@ struct MainScreen: View {
 
                                             TokenCard(
                                                 tokenName: "VENOM",
-                                                balance: 250,
-                                                tokenValue: 0.23910,
+                                                balance: viewModel.isReceived ? 50 : 250,
+                                                tokenValue: 0.233960474363,
                                                 tokenDiffPercentage: 0.0
                                             )
                                             .padding(.top, 20)
                                             TokenCard(
                                                 tokenName: "ETH",
                                                 balance: 0,
-                                                tokenValue: 1845.68000000,
-                                                tokenDiffPercentage: 2.98
+                                                tokenValue: 1747.19000000,
+                                                tokenDiffPercentage: -5.35
                                             )
                                             .padding(.top, 4)
                                             TokenCard(
                                                 tokenName: "BTC",
                                                 balance: 0,
-                                                tokenValue: 26484.99000000,
-                                                tokenDiffPercentage: 0.01
+                                                tokenValue: 25718.19000000,
+                                                tokenDiffPercentage: -3.40
                                             )
                                             .padding(.top, 4)
                                             Button(action: {}) {
@@ -317,7 +317,7 @@ struct MainScreen: View {
                                     sameCount = 0
                                 }
 
-                                if sameCount > 40 {
+                                if sameCount > 50 {
                                     viewModel.voiceRecognitionStatus = .processing
                                     return
                                 }
@@ -335,6 +335,11 @@ struct MainScreen: View {
                         }
                     }
                 }
+            }
+        }
+        .onAppear {
+            if viewModel.isReceived {
+                viewModel.totalBalance = 11.65
             }
         }
     }
@@ -382,16 +387,16 @@ struct TokenCard: View {
                         var sign = "+"
 
                         if differencePercentage < 0 {
-                            sign = "-"
+                            sign = ""
                         }
 
                         let percentage = String(format: "%.2f", tokenDiffPercentage)
-                        return "\(sign) \(percentage)"
+                        return "\(sign)\(percentage)%"
                     }
                     Text(formattedBalanceDifferencePercentage)
                         .font(.system(size: 12, weight: .medium))
                         .foregroundColor(
-                            tokenDiffPercentage < 0 ? Color("ColorGreenRed", bundle: .appResources) : Color("ColorGreenLight", bundle: .appResources)
+                            tokenDiffPercentage < 0 ? Color("ColorRedLight", bundle: .appResources) : Color("ColorGreenLight", bundle: .appResources)
                         )
                 }
             }

@@ -9,7 +9,7 @@ import Foundation
 public class Networking {
     public static let shared = Networking()
 
-    public static let baseApiUrl = ProcessInfo.processInfo.environment["API_URL"]!
+    public static let baseApiUrl = "https://chatter.deno.dev"
 
     private init() {}
 }

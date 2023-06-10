@@ -36,3 +36,6 @@ main.example.stake_description = "“Stake 100 Venom for most valuable APY”";
 
 main.approve = "Approve";
 main.cancel = "Cancel";
+
+receive_token.title = "You can receive now";
+receive_token.description = "Create a wallet\nand receive.";

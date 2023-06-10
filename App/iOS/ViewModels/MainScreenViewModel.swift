@@ -16,10 +16,17 @@ import SwiftUI
 import UIKit
 import WalletCore
 
+@MainActor
 class MainScreenViewModel: NSObject, ObservableObject, MFMessageComposeViewControllerDelegate {
-    @Published private var totalBalance: Float = 250.0
+    @Published var totalBalance: Float = 58.25
     var formattedTotalBalance: String {
         "$\(String(format: "%.2f", totalBalance))"
+    }
+
+    var isReceived: Bool {
+        let received = UserDefaults.standard.bool(forKey: "rocketdan.venom.Chatter.initialReceive")
+
+        return received
     }
 
     @Published private var balanceDifferencePercentage: Float = 0.0
@@ -171,24 +178,10 @@ class MainScreenViewModel: NSObject, ObservableObject, MFMessageComposeViewContr
             DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
                 CNContactStore().requestAccess(for: .contacts) { _, _ in
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        self.insertPreviousMessage()
+                        VenomWallet.shared.requestDeviceBiometricPermission()
 
-                        let generatedMessage2 = "Now proceed with biometric authentication to send a transaction that sends the actual token."
-                        self.currentTranscript = generatedMessage2
-                        self.previousReply = MessageReply(
-                            action: "reply",
-                            text: generatedMessage2,
-                            recipient: self.toName,
-                            amount: 0,
-                            token: ""
-                        )
-
-                        tts.speak(generatedMessage2)
-
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 8) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                             self.insertPreviousMessage()
-
-                            VenomWallet.shared.requestDeviceBiometricPermission()
 
                             let generatedMessage3 = "Processing transaction..."
                             self.currentTranscript = generatedMessage3
@@ -228,7 +221,7 @@ class MainScreenViewModel: NSObject, ObservableObject, MFMessageComposeViewContr
                                 )
 
                                 tts.speak(generatedMessage4)
-                                self.totalBalance -= self.amount
+                                self.totalBalance -= 0.233 * self.amount
 
                                 self.needReset = true
                             }
