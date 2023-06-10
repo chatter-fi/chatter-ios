@@ -8,7 +8,8 @@ import DesignSystem
 import Foundation
 import SwiftUI
 
-public class MainScreenViewModel: ObservableObject {
+@MainActor
+class MainScreenViewModel: ObservableObject {
     @Published private var totalBalance: Float = 0.0
     var formattedTotalBalance: String {
         "$\(String(format: "%.2f", totalBalance))"
@@ -30,5 +31,11 @@ public class MainScreenViewModel: ObservableObject {
 
     @Published var voiceRecognitionStatus: CTVoiceProcessingIndicator.CurrentType = .idle
 
+    @Published var currentTranscript: String = ""
+
     init() {}
+
+    func updateCurrentTranscript(_ transcript: String) {
+        currentTranscript = transcript
+    }
 }

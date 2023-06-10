@@ -10,6 +10,7 @@ import Foundation
 import SwiftExtensionsPack
 import SwiftUI
 import Utils
+import WalletCore
 
 struct WalletCreateLoadingScreen: View {
     @State private var firstShapeAngle: Angle = .degrees(-45)

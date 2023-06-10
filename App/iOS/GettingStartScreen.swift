@@ -7,9 +7,10 @@
 import AppResources
 import DesignSystem
 import Foundation
+import HapticCore
 import SwiftUI
-import UIKit
 import Utils
+import WalletCore
 
 struct GettingStartScreen: View {
     @State private var address: String = ""

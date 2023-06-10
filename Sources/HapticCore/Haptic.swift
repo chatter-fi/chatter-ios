@@ -1,9 +1,8 @@
+// Copyright (c) 2023 Rocketdan
 //
-//  File.swift
-//
-//
-//  Created by 도라도라 on 2023/06/09.
-//
+// Chatter Venom iOS Project
+// File Name : Haptic.swift
+// Description : Haptic Manager
 
 import Foundation
 import UIKit
